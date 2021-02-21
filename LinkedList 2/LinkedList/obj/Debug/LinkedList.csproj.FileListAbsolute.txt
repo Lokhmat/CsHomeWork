@@ -1,0 +1,20 @@
+C:\Users\Arhisan\source\repos\LinkedList\LinkedList\bin\Debug\LinkedList.exe.config
+C:\Users\Arhisan\source\repos\LinkedList\LinkedList\bin\Debug\LinkedList.exe
+C:\Users\Arhisan\source\repos\LinkedList\LinkedList\bin\Debug\LinkedList.pdb
+C:\Users\Arhisan\source\repos\LinkedList\LinkedList\obj\Debug\LinkedList.csproj.CoreCompileInputs.cache
+C:\Users\Arhisan\source\repos\LinkedList\LinkedList\obj\Debug\LinkedList.exe
+C:\Users\Arhisan\source\repos\LinkedList\LinkedList\obj\Debug\LinkedList.pdb
+C:\Users\Arhisan\Desktop\LinkedList\LinkedList\bin\Debug\LinkedList.exe.config
+C:\Users\Arhisan\Desktop\LinkedList\LinkedList\bin\Debug\LinkedList.exe
+C:\Users\Arhisan\Desktop\LinkedList\LinkedList\bin\Debug\LinkedList.pdb
+C:\Users\Arhisan\Desktop\LinkedList\LinkedList\obj\Debug\LinkedList.csprojAssemblyReference.cache
+C:\Users\Arhisan\Desktop\LinkedList\LinkedList\obj\Debug\LinkedList.csproj.CoreCompileInputs.cache
+C:\Users\Arhisan\Desktop\LinkedList\LinkedList\obj\Debug\LinkedList.exe
+C:\Users\Arhisan\Desktop\LinkedList\LinkedList\obj\Debug\LinkedList.pdb
+C:\Users\mi\Desktop\LinkedList 2\LinkedList\bin\Debug\LinkedList.exe.config
+C:\Users\mi\Desktop\LinkedList 2\LinkedList\bin\Debug\LinkedList.exe
+C:\Users\mi\Desktop\LinkedList 2\LinkedList\bin\Debug\LinkedList.pdb
+C:\Users\mi\Desktop\LinkedList 2\LinkedList\obj\Debug\LinkedList.csprojAssemblyReference.cache
+C:\Users\mi\Desktop\LinkedList 2\LinkedList\obj\Debug\LinkedList.csproj.CoreCompileInputs.cache
+C:\Users\mi\Desktop\LinkedList 2\LinkedList\obj\Debug\LinkedList.exe
+C:\Users\mi\Desktop\LinkedList 2\LinkedList\obj\Debug\LinkedList.pdb

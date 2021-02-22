@@ -17,59 +17,59 @@ namespace LinkedList
     /// <typeparam name="T"></typeparam>
     class LinkedList<T> : ICustomCollection<T>
     {
-        int Count { get; set; }
+        int count;
         Node<T> first;
         Node<T> last;
         public T this[int index]
         {
             get
             {
-                if (index >= Count)
-                    throw new IndexOutOfRangeException($"Length is {Count} you try to get {index} element");
+                if (index >= count)
+                    throw new IndexOutOfRangeException($"Length is {count} you try to get {index} element");
                 Node<T> cur = first;
                 if (index == 0)
-                    return cur.element;
+                    return cur.Element;
                 for (int i = 0; i < index; i++)
                 {
-                    cur = cur.next;
+                    cur = cur.Next;
                 }
-                return cur.element;
+                return cur.Element;
             }
             set
             {
-                if (index >= Count)
-                    throw new IndexOutOfRangeException($"Length is {Count} you try to set {index} element");
+                if (index >= count)
+                    throw new IndexOutOfRangeException($"Length is {count} you try to set {index} element");
                 Node<T> cur = first;
                 if (index == 0)
                 {
-                    cur.element = value;
+                    cur.Element = value;
                     return;
                 }
 
                 for (int i = 0; i < index; i++)
                 {
-                    cur = cur.next;
+                    cur = cur.Next;
                 }
-                cur.element = value;
+                cur.Element = value;
             }
         }
 
         public int Length
-            => Count;
+            => count;
 
         public void Add(T item)
         {
-            if (Count == 0)
+            if (count == 0)
             {
                 first = new Node<T>(item);
                 last = first;
-                Count++;
+                count++;
             }
             else
             {
-                Count++;
+                count++;
                 Node<T> newNode = new Node<T>(item);
-                last.next = newNode;
+                last.Next = newNode;
                 last = newNode;
 
             }
@@ -79,28 +79,28 @@ namespace LinkedList
         {
             Node<T> cur = first;
             Comparer<T> comparer = Comparer<T>.Default;
-            for (int i = 0; i < Count - 1; i++)
+            for (int i = 0; i < count - 1; i++)
             {
-                if (comparer.Compare(cur.element, item) == 0)
+                if (comparer.Compare(cur.Element, item) == 0)
                     return true;
-                cur = cur.next;
+                cur = cur.Next;
             }
             return false;
         }
 
         public bool IsEmpty()
         {
-            return Count == 0;
+            return count == 0;
         }
 
         public void Remove(int index)
         {
-            if (index >= Count)
-                throw new IndexOutOfRangeException($"Length is {Count} you try to remove {index} element");
+            if (index >= count)
+                throw new IndexOutOfRangeException($"Length is {count} you try to remove {index} element");
             if (index == 0)
             {
-                first = first.next;
-                Count--;
+                first = first.Next;
+                count--;
                 return;
             }
             Node<T> cur = first;
@@ -108,25 +108,25 @@ namespace LinkedList
             for (int i = 0; i < index; i++)
             {
                 left = cur;
-                cur = cur.next;
+                cur = cur.Next;
             }
-            var right = cur.next;
-            left.next = right;
-            Count--;
+            var right = cur.Next;
+            left.Next = right;
+            count--;
         }
 
         public override string ToString()
         {
             string stringOfItems = "";
             Node<T> cur = first;
-            for (int i = 0; i < Count; i++)
+            for (int i = 0; i < count; i++)
             {
-                if (i == Count - 1)
-                    stringOfItems += $"{cur.element}";
+                if (i == count - 1)
+                    stringOfItems += $"{cur.Element}";
                 else
                 {
-                    stringOfItems += $"{cur.element} ";
-                    cur = cur.next;
+                    stringOfItems += $"{cur.Element} ";
+                    cur = cur.Next;
                 }
             }
             return $"{Length} items: [{stringOfItems}]";
@@ -144,12 +144,12 @@ namespace LinkedList
     /// <typeparam name="T"></typeparam>
     class Node<T>
     {
-        public T element;
-        public Node<T> next;
+        public T Element { get; set; }
+        public Node<T> Next { get; set; }
 
         public Node(T element)
         {
-            this.element = element;
+            Element = element;
         }
     }
 }

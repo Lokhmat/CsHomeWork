@@ -1,0 +1,13 @@
+D:\Work\HwProga\LINQ\bin\Debug\netcoreapp3.1\semLinqTask.exe
+D:\Work\HwProga\LINQ\bin\Debug\netcoreapp3.1\semLinqTask.deps.json
+D:\Work\HwProga\LINQ\bin\Debug\netcoreapp3.1\semLinqTask.runtimeconfig.json
+D:\Work\HwProga\LINQ\bin\Debug\netcoreapp3.1\semLinqTask.runtimeconfig.dev.json
+D:\Work\HwProga\LINQ\bin\Debug\netcoreapp3.1\semLinqTask.dll
+D:\Work\HwProga\LINQ\bin\Debug\netcoreapp3.1\semLinqTask.pdb
+D:\Work\HwProga\LINQ\obj\Debug\netcoreapp3.1\semLinqTask.csprojAssemblyReference.cache
+D:\Work\HwProga\LINQ\obj\Debug\netcoreapp3.1\semLinqTask.AssemblyInfoInputs.cache
+D:\Work\HwProga\LINQ\obj\Debug\netcoreapp3.1\semLinqTask.AssemblyInfo.cs
+D:\Work\HwProga\LINQ\obj\Debug\netcoreapp3.1\semLinqTask.csproj.CoreCompileInputs.cache
+D:\Work\HwProga\LINQ\obj\Debug\netcoreapp3.1\semLinqTask.dll
+D:\Work\HwProga\LINQ\obj\Debug\netcoreapp3.1\semLinqTask.pdb
+D:\Work\HwProga\LINQ\obj\Debug\netcoreapp3.1\semLinqTask.genruntimeconfig.cache

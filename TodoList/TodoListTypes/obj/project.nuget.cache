@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "k1g9Z1kjlDkiGyaTNcsfFgtUWvFbp9aCpbQzsiY+tGhY4/+HQpN0oaoMq0q7J7JMvSnhfaCUxwVfMSztdHYVQQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\mi\\source\\repos\\TodoList\\TodoListTypes\\TodoListTypes.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mi\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

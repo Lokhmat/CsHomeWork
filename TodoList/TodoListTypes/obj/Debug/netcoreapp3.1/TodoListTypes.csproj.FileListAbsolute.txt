@@ -1,0 +1,9 @@
+C:\Users\mi\source\repos\TodoList\TodoListTypes\bin\Debug\netcoreapp3.1\TodoListTypes.deps.json
+C:\Users\mi\source\repos\TodoList\TodoListTypes\bin\Debug\netcoreapp3.1\TodoListTypes.dll
+C:\Users\mi\source\repos\TodoList\TodoListTypes\bin\Debug\netcoreapp3.1\TodoListTypes.pdb
+C:\Users\mi\source\repos\TodoList\TodoListTypes\obj\Debug\netcoreapp3.1\TodoListTypes.csprojAssemblyReference.cache
+C:\Users\mi\source\repos\TodoList\TodoListTypes\obj\Debug\netcoreapp3.1\TodoListTypes.AssemblyInfoInputs.cache
+C:\Users\mi\source\repos\TodoList\TodoListTypes\obj\Debug\netcoreapp3.1\TodoListTypes.AssemblyInfo.cs
+C:\Users\mi\source\repos\TodoList\TodoListTypes\obj\Debug\netcoreapp3.1\TodoListTypes.csproj.CoreCompileInputs.cache
+C:\Users\mi\source\repos\TodoList\TodoListTypes\obj\Debug\netcoreapp3.1\TodoListTypes.dll
+C:\Users\mi\source\repos\TodoList\TodoListTypes\obj\Debug\netcoreapp3.1\TodoListTypes.pdb

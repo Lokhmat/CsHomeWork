@@ -1,0 +1,86 @@
+﻿<Window x:Class="NeDoExcel.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NeDoExcel"
+        
+        
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Background="#FF272727">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="8*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ToolBar Background="#FF272727" Foreground="#FF272727" Margin="0,0,-24,0" ToolBarTray.IsLocked="True" Grid.ColumnSpan="2">
+            <Menu Background="#FF272727">
+                <MenuItem Header="Файл" Background="#FF272727" Foreground="#FFE0DDDD" BorderThickness="0,0,0,0" Height="25">
+                    <MenuItem.Style>
+                        <Style>
+                            <Style.Triggers>
+                                <Trigger Property="MenuItem.IsMouseOver" Value="true">
+                                    <Setter Property="MenuItem.Foreground" Value="White" />
+                                    <Setter Property="MenuItem.Background" Value="#293340" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </MenuItem.Style>
+                    <MenuItem Header="Открыть" Click="OpenCSV"/>
+
+                </MenuItem>
+            </Menu>
+            <Button Content="Построить график X->Y" Foreground="#FFE0DDDD" Click="XYButton_Click"></Button>
+            <Button Content="О программе" Foreground="#FFE0DDDD" Click="FAQButton_Click"></Button>
+        </ToolBar>
+        <DataGrid x:Name="tableGrid" Grid.Row="1" ItemsSource="{Binding}" SelectionMode="Extended" CanUserSortColumns="False" SelectionUnit="CellOrRowHeader" IsReadOnly="True"/>
+        <Label Content="Посчитать:" Grid.Column="1" HorizontalAlignment="Center" Margin="0,5,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="White"/>
+        <Label x:Name="midLabel" Content="Среднее - " Grid.Column="1" HorizontalAlignment="Left" Margin="10,36,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="White"/>
+        <Label x:Name="medLabel" Content="Медиана - " Grid.Column="1" HorizontalAlignment="Left" Margin="10,67,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="White"/>
+        <Label x:Name="avSqLabel" Content="Среднекв. откл. - " Grid.Column="1" HorizontalAlignment="Left" Margin="10,98,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="White"/>
+        <Label x:Name="dispLabel" Content="Дисперсия - " Grid.Column="1" HorizontalAlignment="Left" Margin="10,129,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="White"/>
+        <Button x:Name="countButton" Content="Посчитать" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Height="30" Width="72" Margin="15,160,0,0" Background="#FF272727" Foreground="#FFE0DDDD" Click="CountButton_Click">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Label Grid.Column="1" HorizontalAlignment="Left" Margin="10,195,0,0" Grid.Row="1" VerticalAlignment="Top" Background="#FF272727" Foreground="#FFE0DDDD" Content="Введите номер стобца:"/>
+        <TextBox x:Name="colId" Grid.Column="1" HorizontalAlignment="Left" Margin="15,226,0,0" Grid.Row="1" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="92" Height="23" Background="#FF272727" Foreground="#FFE0DDDD"/>
+        <Button x:Name="gistButton" Click="GistButton_Click" Content="Построить гистограмму" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Height="30" Width="141" Margin="15,254,0,0" Background="#FF272727" Foreground="#FFE0DDDD">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+        <TextBox x:Name="xId" Grid.Column="1" HorizontalAlignment="Left" Margin="17,318,0,0" Grid.Row="1" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="92" Height="23" Background="#FF272727" Foreground="#FFE0DDDD"/>
+        <TextBox x:Name="yId" Grid.Column="1" HorizontalAlignment="Left" Margin="17,346,0,0" Grid.Row="1" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="92" Height="23" Background="#FF272727" Foreground="#FFE0DDDD"/>
+        <Label x:Name="xLabel" Content=" - X" Grid.Column="1" HorizontalAlignment="Left" Margin="114,317,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="White" Width="30"/>
+        <Label x:Name="yLabel" Content=" - Y" Grid.Column="1" HorizontalAlignment="Left" Margin="114,343,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="White" Width="30"/>
+
+
+
+    </Grid>
+</Window>

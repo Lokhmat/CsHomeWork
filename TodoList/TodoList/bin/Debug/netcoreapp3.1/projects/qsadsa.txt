@@ -1,0 +1,2 @@
+TodoListTypes.Epic {"status":"Открыто","users":{"Name":""},"Tasks":[],"Name":"asdf","CreateTime":"2021-02-24T00:21:47.023839+03:00"}
+TodoListTypes.Task {"status":"Открыто","users":{"Name":""},"Name":"asdff","CreateTime":"2021-02-24T00:22:01.979088+03:00"}

@@ -129,11 +129,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mi\\source\\repos\\NeDoExcel\\NeDoExcel\\NeDoExcel.csproj",
+      "projectUniqueName": "D:\\Work\\C#HW\\NeDoExcel\\NeDoExcel\\NeDoExcel.csproj",
       "projectName": "NeDoExcel",
-      "projectPath": "C:\\Users\\mi\\source\\repos\\NeDoExcel\\NeDoExcel\\NeDoExcel.csproj",
+      "projectPath": "D:\\Work\\C#HW\\NeDoExcel\\NeDoExcel\\NeDoExcel.csproj",
       "packagesPath": "C:\\Users\\mi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mi\\source\\repos\\NeDoExcel\\NeDoExcel\\obj\\",
+      "outputPath": "D:\\Work\\C#HW\\NeDoExcel\\NeDoExcel\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

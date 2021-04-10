@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DMOdVnwgLcOCx2oHkVVPkEqqxAxvD8iIweWwiJ7O5ol+jE8IT3rwuxhhrWMiO4wQx/sL702oKzpLVS7Zy+RCGA==",
+  "dgSpecHash": "UkkJc2ZKmr8TQlEZyJyMvJvtovNR0quz212K4wHw+ZJ6xJ1TRWFt64AmtZHAuQzKHWyxnZDBBUecnG6AXEVyDA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mi\\source\\repos\\NeDoExcel\\NeDoExcel\\NeDoExcel.csproj",
+  "projectFilePath": "D:\\Work\\C#HW\\NeDoExcel\\NeDoExcel\\NeDoExcel.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mi\\.nuget\\packages\\csvhelper\\26.0.1\\csvhelper.26.0.1.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512"

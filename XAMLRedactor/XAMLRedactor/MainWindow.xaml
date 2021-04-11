@@ -15,12 +15,11 @@
             <Button Foreground="#FFECECEC" Click="OpenButton_Click" BorderBrush="#FFE2DFDF">Открыть XAML</Button>
             <Button Foreground="#FFECECEC" Click="SaveButton_Click" BorderBrush="#FFE2DFDF" Margin="5,0,0,0">Сохранить</Button>
             <Button Foreground="#FFECECEC" Click="OpenAnotherButton_Click" BorderBrush="#FFE2DFDF" Margin="5,0,0,0">Открыть ещё один редактор</Button>
-            <Separator></Separator>
+            <Separator Margin="5,0,0,0"></Separator>
             <Label x:Name="fileName" Foreground="#FFECECEC" />
         </ToolBar>
-        <RichTextBox Grid.Row="1" x:Name="textBox" TextChanged="textBox_TextChanged">
-            <FlowDocument>
-            </FlowDocument>
+        <RichTextBox Grid.Row="1" x:Name="textBox" TextChanged="textBox_TextChanged" PreviewKeyDown="textBox_PreviewKeyDown">
+            <FlowDocument x:Name="doc"></FlowDocument>
         </RichTextBox>
 
     </Grid>

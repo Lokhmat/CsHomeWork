@@ -1,0 +1,16 @@
+D:\Work\C#HW\XAMLRedactor\Parser\bin\Debug\netcoreapp3.1\Parser.deps.json
+D:\Work\C#HW\XAMLRedactor\Parser\bin\Debug\netcoreapp3.1\Parser.dll
+D:\Work\C#HW\XAMLRedactor\Parser\bin\Debug\netcoreapp3.1\Parser.pdb
+D:\Work\C#HW\XAMLRedactor\Parser\obj\Debug\netcoreapp3.1\Parser.csprojAssemblyReference.cache
+D:\Work\C#HW\XAMLRedactor\Parser\obj\Debug\netcoreapp3.1\Parser.csproj.Antlr4GeneratedCodeFileListAbsolute.txt
+D:\Work\C#HW\XAMLRedactor\Parser\obj\Debug\netcoreapp3.1\Parser.AssemblyInfoInputs.cache
+D:\Work\C#HW\XAMLRedactor\Parser\obj\Debug\netcoreapp3.1\Parser.AssemblyInfo.cs
+D:\Work\C#HW\XAMLRedactor\Parser\obj\Debug\netcoreapp3.1\Parser.csproj.CoreCompileInputs.cache
+D:\Work\C#HW\XAMLRedactor\Parser\obj\Debug\netcoreapp3.1\Parser.dll
+D:\Work\C#HW\XAMLRedactor\Parser\obj\Debug\netcoreapp3.1\Parser.pdb
+D:\Work\C#HW\XAMLRedactor\Parser\obj\Debug\netcoreapp3.1\XAMLLexer.cs
+D:\Work\C#HW\XAMLRedactor\Parser\obj\Debug\netcoreapp3.1\XAMLParser.cs
+D:\Work\C#HW\XAMLRedactor\Parser\obj\Debug\netcoreapp3.1\XAMLParserListener.cs
+D:\Work\C#HW\XAMLRedactor\Parser\obj\Debug\netcoreapp3.1\XAMLParserBaseListener.cs
+D:\Work\C#HW\XAMLRedactor\Parser\obj\Debug\netcoreapp3.1\XAMLParserVisitor.cs
+D:\Work\C#HW\XAMLRedactor\Parser\obj\Debug\netcoreapp3.1\XAMLParserBaseVisitor.cs

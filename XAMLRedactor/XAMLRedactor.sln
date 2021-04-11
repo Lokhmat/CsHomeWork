@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XAMLRedactor", "XAMLRedactor\XAMLRedactor.csproj", "{AA170043-75E3-4C53-91A1-443CB3FE6E13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XAMLRedactor", "XAMLRedactor\XAMLRedactor.csproj", "{AA170043-75E3-4C53-91A1-443CB3FE6E13}"
+	ProjectSection(ProjectDependencies) = postProject
+		{80AADA89-EFC4-41F4-A435-9AD58F9AEB92} = {80AADA89-EFC4-41F4-A435-9AD58F9AEB92}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser", "Parser\Parser.csproj", "{80AADA89-EFC4-41F4-A435-9AD58F9AEB92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{AA170043-75E3-4C53-91A1-443CB3FE6E13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA170043-75E3-4C53-91A1-443CB3FE6E13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA170043-75E3-4C53-91A1-443CB3FE6E13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80AADA89-EFC4-41F4-A435-9AD58F9AEB92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80AADA89-EFC4-41F4-A435-9AD58F9AEB92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80AADA89-EFC4-41F4-A435-9AD58F9AEB92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80AADA89-EFC4-41F4-A435-9AD58F9AEB92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

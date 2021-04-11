@@ -1,0 +1,6 @@
+D:\Work\C#HW\XAMLRedactor\Parser\obj\Debug\netcoreapp3.1\XAMLLexer.cs
+D:\Work\C#HW\XAMLRedactor\Parser\obj\Debug\netcoreapp3.1\XAMLParser.cs
+D:\Work\C#HW\XAMLRedactor\Parser\obj\Debug\netcoreapp3.1\XAMLParserListener.cs
+D:\Work\C#HW\XAMLRedactor\Parser\obj\Debug\netcoreapp3.1\XAMLParserBaseListener.cs
+D:\Work\C#HW\XAMLRedactor\Parser\obj\Debug\netcoreapp3.1\XAMLParserVisitor.cs
+D:\Work\C#HW\XAMLRedactor\Parser\obj\Debug\netcoreapp3.1\XAMLParserBaseVisitor.cs

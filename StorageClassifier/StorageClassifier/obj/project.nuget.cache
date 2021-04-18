@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "OKGoF62P+T4k3nd2w/zOXcr8shZMmArRYN70NuDu1XlEYyTYdpqDA2X48Cn4ugKqM2xiihXhG3NQmWPb95GWLw==",
+  "success": true,
+  "projectFilePath": "D:\\Work\\C#HW\\StorageClassifier\\StorageClassifier\\StorageClassifier.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mi\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

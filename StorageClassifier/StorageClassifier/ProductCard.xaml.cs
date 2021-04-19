@@ -21,7 +21,7 @@ namespace StorageClassifier
         {
             InitializeComponent();
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-            dispatcherTimer.Tick += checkFields;
+            dispatcherTimer.Tick += CheckFields;
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 50);
             dispatcherTimer.Start();
         }
@@ -34,7 +34,7 @@ namespace StorageClassifier
             Left.Text = product.Left.ToString();
         }
 
-        private void checkFields(object sender, EventArgs e)
+        private void CheckFields(object sender, EventArgs e)
         {
             if (Name.Text != "" && Code.Text != "" && double.TryParse(Price.Text, out _) && int.TryParse(Left.Text, out _))
                 saveButton.IsEnabled = true;

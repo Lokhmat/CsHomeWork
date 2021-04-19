@@ -31,6 +31,50 @@ namespace StorageClassifier
         {
             InitializeComponent();
             backupTree = new MyItem();
+            System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            dispatcherTimer.Tick += CheckFields;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 20);
+            dispatcherTimer.Start();
+        }
+
+        private void CheckFields(object sender, EventArgs e)
+        {
+            if (productsGrid.SelectedItems.Count != 1)
+            {
+                deleteProduct.IsEnabled = false;
+                editProduct.IsEnabled = false;
+            }
+            else
+            {
+                deleteProduct.IsEnabled = true;
+                editProduct.IsEnabled = true;
+            }
+            if (!int.TryParse(lowValue.Text, out _))
+                exportButton.IsEnabled = false;
+            else
+                exportButton.IsEnabled = true;
+            if (nodeName.Text != "")
+            {
+                if (treeView.SelectedItem != null)
+                {
+                    addLineButton.IsEnabled = true;
+                    addNodeButton.IsEnabled = true;
+                }
+                else
+                {
+                    addNodeButton.IsEnabled = false;
+                    addLineButton.IsEnabled = false;
+                }
+                addGlobalNodeButton.IsEnabled = true;
+            }
+            else
+            {
+                if (treeView.SelectedItem == null)
+                    addLineButton.IsEnabled = false;
+                addNodeButton.IsEnabled = false;
+                addGlobalNodeButton.IsEnabled = false;
+                addLineButton.IsEnabled = false;
+            }
         }
 
         private void addNodeButton_Click(object sender, RoutedEventArgs e)
@@ -313,7 +357,7 @@ namespace StorageClassifier
         {
             List<string> items = new List<string>();
             var cur = tree;
-            while(cur!= null)
+            while (cur != null)
             {
                 items.Add(cur.Header.ToString());
                 if (cur.Parent == null)

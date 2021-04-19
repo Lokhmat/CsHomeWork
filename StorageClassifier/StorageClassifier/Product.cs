@@ -10,5 +10,6 @@ namespace StorageClassifier
         public string Code { get; set; }
         public double Price { get; set; }
         public int Left { get; set; }
+        public string Path { get; set; }
     }
 }

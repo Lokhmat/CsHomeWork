@@ -75,6 +75,25 @@ namespace StorageClassifier
                 addGlobalNodeButton.IsEnabled = false;
                 addLineButton.IsEnabled = false;
             }
+            CheckForDuplicateNodes();
+        }
+
+        private void CheckForDuplicateNodes()
+        {
+            var t = treeView.Items.OfType<TreeViewItem>();
+            if (t.Select(x => x.Header).Contains(nodeName.Text))
+
+                addGlobalNodeButton.IsEnabled = false;
+            else
+                addGlobalNodeButton.IsEnabled = true;
+            if (treeView.SelectedItem != null)
+            {
+                t = (treeView.SelectedItem as TreeViewItem).Items.OfType<TreeViewItem>();
+                if (t.Select(x => x.Header).Contains(nodeName.Text))
+                    addNodeButton.IsEnabled = false;
+                else
+                    addNodeButton.IsEnabled = true;
+            }
         }
 
         private void addNodeButton_Click(object sender, RoutedEventArgs e)
@@ -219,6 +238,7 @@ namespace StorageClassifier
                     MessageBox.Show("Введённое название товара в этом разделе не уникально", "Ошибка");
                     return;
                 }
+                (ProductData as Product).Path = string.Join('/', AncestorsAndSelf(treeView.SelectedItem as MyTreeViewItem));
                 (treeView.SelectedItem as MyTreeViewItem).Products.Add(ProductData as Product);
                 ValidateGrid(null, null);
             }
@@ -232,8 +252,25 @@ namespace StorageClassifier
                 {
                     productsGrid.Items.Add(product);
                 }
+                productsGrid.Items.Add(new Product() { Name = "___ Товары в подразделах __", Code = "_____"});
+                foreach (MyTreeViewItem item in (treeView.SelectedItem as MyTreeViewItem).Items)
+                    GoDownTree(item);
             }
         }
+
+        private void GoDownTree(MyTreeViewItem node)
+        {
+            foreach (Product product in node.Products)
+            {
+                productsGrid.Items.Add(product);
+            }
+            foreach (MyTreeViewItem item in node.Items)
+            {
+                GoDownTree(item);
+            }
+        }
+
+
         // TODO Добавить редактирование товаров
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
@@ -273,8 +310,25 @@ namespace StorageClassifier
                 MessageBox.Show("Вы должны выбрать раздел и товар", "Ошибка");
                 return;
             }
-            (treeView.SelectedItem as MyTreeViewItem).Products.Remove(productsGrid.SelectedItem as Product);
+            var clickedProduct = productsGrid.SelectedItem as Product;
+            if(!(treeView.SelectedItem as MyTreeViewItem).Products.Remove(clickedProduct))
+            {
+                foreach(MyTreeViewItem item in (treeView.SelectedItem as MyTreeViewItem).Items)
+                {
+                    DeleteDown(item, clickedProduct);
+                }
+            }
             ValidateGrid(null, null);
+        }
+
+        private void DeleteDown(MyTreeViewItem tree, Product product)
+        {
+            if (tree.Products.Remove(product))
+                return;
+            foreach(MyTreeViewItem item in tree.Items)
+            {
+                DeleteDown(item, product);
+            }
         }
 
         private void editProduct_Click(object sender, RoutedEventArgs e)
@@ -304,12 +358,28 @@ namespace StorageClassifier
                     MessageBox.Show("Введённое название товара в этом разделе не уникально", "Ошибка");
                     return;
                 }
-                var change = (treeView.SelectedItem as MyTreeViewItem).Products.Find(x => x.Name == curProduct.Name);
-                change.Name = (ProductData as Product).Name;
-                change.Price = (ProductData as Product).Price;
-                change.Code = (ProductData as Product).Code;
-                change.Left = (ProductData as Product).Left;
-                ValidateGrid(null, null);
+                List<Product> products = new List<Product>();
+                FindProduct(treeView.SelectedItem as MyTreeViewItem, curProduct, products);
+                if (products.Count == 1)
+                {
+                    var change = products[0];
+                    change.Name = (ProductData as Product).Name;
+                    change.Price = (ProductData as Product).Price;
+                    change.Code = (ProductData as Product).Code;
+                    change.Left = (ProductData as Product).Left;
+                    ValidateGrid(null, null);
+                }
+            }
+        }
+
+        private void FindProduct(MyTreeViewItem tree, Product product, List<Product> findProduct)
+        {
+            var cur = tree.Products.Find(x => x.Path == product.Path);
+            if (cur != null)
+                findProduct.Add(cur);
+            foreach(MyTreeViewItem item in tree.Items)
+            {
+                FindProduct(item, product, findProduct);
             }
         }
 

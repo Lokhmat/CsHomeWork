@@ -42,12 +42,12 @@ namespace StorageClassifier
     ///     <MyNamespace:MyTreeView/>
     ///
     /// </summary>
+    [Serializable]
     public class MyTreeView : TreeView
     {
         static MyTreeView()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MyTreeView), new FrameworkPropertyMetadata(typeof(MyTreeView)));
         }
-        public List<TreeViewItem> nodes = new List<TreeViewItem>();
     }
 }

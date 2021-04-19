@@ -17,8 +17,14 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <ToolBar Grid.ColumnSpan="2">
-            <Button x:Name="loadButton" Content="Загрузить"/>
-            <Button x:Name="saveButton" Content="Сохранить" Click="saveButton_Click"/>
+            <Menu>
+                <MenuItem Header="Файл" Background="#FFEEF5FD" >
+                    <MenuItem x:Name="loadButton" Header="Загрузить" Click="loadButton_Click"/>
+                    <MenuItem x:Name="saveButton" Header="Сохранить" Click="saveButton_Click"/>
+                    <MenuItem x:Name="faqButton" Header="О программе"/>
+                </MenuItem>
+            </Menu>
+            
             <Separator/>
             <Button x:Name="addNodeButton" Content="Добавить под. узел:" Click="addNodeButton_Click"/>
             <Button x:Name="addGlobalNodeButton" Content="Добавить глобальный узел" Click="addGlobalNodeButton_Click"/>
@@ -48,7 +54,33 @@
             </TextBox>
             <Separator/>
             <Button x:Name="addLineButton" Content="Добавить товар" Click="addLineButton_Click"/>
-            <Button x:Name="faqButton" Content="О программе"/>
+            <Separator/>
+            <Button x:Name="exportButton" Content="Экспорт CSV" Click="exportButton_Click"/>
+            <TextBox x:Name="lowValue" Width="100">
+                <TextBox.Style>
+                    <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                        <Style.Resources>
+                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                <VisualBrush.Visual>
+                                    <Label Content="Маленькое кол-во" Foreground="Gray" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Style.Resources>
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="Text" Value="{x:Null}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="Background" Value="White" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+                
         </ToolBar>
         <TreeView x:Name="treeView" Grid.Row="1" SelectedItemChanged="ValidateGrid">
             <TreeView.ContextMenu>
@@ -65,6 +97,12 @@
                 <DataGridTextColumn Header="Цена" IsReadOnly="True" Binding="{Binding Path=Price}"/>
                 <DataGridTextColumn Header="Остаток" IsReadOnly="True" Binding="{Binding Path=Left}"/>
             </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Удалить выбранный" x:Name="deleteProduct" Click="deleteProduct_Click"></MenuItem>
+                    <MenuItem Header="Изменить выбранный" x:Name="editProduct" Click="editProduct_Click"></MenuItem>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
         </DataGrid>
 
 

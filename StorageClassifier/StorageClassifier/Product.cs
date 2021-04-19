@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StorageClassifier
 {
-    class Product
+    public class Product
     {
         public string Name { get; set; }
         public string Code { get; set; }

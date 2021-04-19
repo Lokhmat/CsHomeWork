@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using Microsoft.Win32;
 
 namespace StorageClassifier
 {
@@ -25,10 +26,11 @@ namespace StorageClassifier
         bool changed = false;
         public object ProductData { get; set; }
         string newName;
+        MyItem backupTree;
         public MainWindow()
         {
             InitializeComponent();
-
+            backupTree = new MyItem();
         }
 
         private void addNodeButton_Click(object sender, RoutedEventArgs e)
@@ -46,7 +48,8 @@ namespace StorageClassifier
                     MessageBox.Show("В этом узле уже существует такой под. узел.", "Ошибка");
                     return;
                 }
-                (treeView.SelectedItem as TreeViewItem).Items.Add(new MyTreeViewItem() { Header = nodeName.Text });
+                var node = new MyTreeViewItem() { Header = nodeName.Text };
+                (treeView.SelectedItem as TreeViewItem).Items.Add(node);
 
             }
             catch (Exception ex)
@@ -70,8 +73,9 @@ namespace StorageClassifier
                     MessageBox.Show("В этом узле уже существует такой под. узел.", "Ошибка");
                     return;
                 }
-                treeView.Items.Add(new MyTreeViewItem() { Header = nodeName.Text });
-
+                var node = new MyTreeViewItem() { Header = nodeName.Text };
+                treeView.Items.Add(node);
+                backupTree.Items.Add(new MyItem() { prototype = node, Header = node.Header.ToString() });
             }
             catch (Exception ex)
             {
@@ -166,11 +170,16 @@ namespace StorageClassifier
         {
             if (ProductData != null)
             {
+                if ((treeView.SelectedItem as MyTreeViewItem).Products.Select(x => x.Name).Contains((ProductData as Product).Name))
+                {
+                    MessageBox.Show("Введённое название товара в этом разделе не уникально", "Ошибка");
+                    return;
+                }
                 (treeView.SelectedItem as MyTreeViewItem).Products.Add(ProductData as Product);
                 ValidateGrid(null, null);
             }
         }
-        private void ValidateGrid(object sender, EventArgs e)
+        private void ValidateGrid(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (ProductData != null)
             {
@@ -184,8 +193,137 @@ namespace StorageClassifier
         // TODO Добавить редактирование товаров
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
-            //string output = JsonConvert.SerializeObject(treeView);
-            File.AppendAllText($"save.txt", $"{JsonConvert.SerializeObject(treeView)}");
+            //MessageBox.Show(((treeView.Items[0] as TreeViewItem).Items[0] as TreeViewItem);
+            /*
+            // Тут не подходит сериализация 
+            var settings = new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+            File.AppendAllText($"save.txt", $"{JsonConvert.SerializeObject(treeView.Items, settings)}");
+            // Я не знаю, работает это или нет
+            /*
+            try
+            {
+                using (Stream stream = File.Open("storage.bin", FileMode.Create))
+                {
+                    var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                    binaryFormatter.Serialize(stream, treeView.Items.Cast<MyTreeViewItem>().ToList());
+                }
+            }
+            catch (Exception ex)
+            { MessageBox.Show(ex.Message); }*/
+            RelDict.SerializeTree(treeView);
+
+        }
+
+        private void loadButton_Click(object sender, RoutedEventArgs e)
+        {
+            //RelDict.DeserializeTree("storage.bin");
+        }
+
+        private void deleteProduct_Click(object sender, RoutedEventArgs e)
+        {
+            if (treeView.SelectedItem == null || productsGrid.SelectedItem == null)
+            {
+                MessageBox.Show("Вы должны выбрать раздел и товар", "Ошибка");
+                return;
+            }
+            (treeView.SelectedItem as MyTreeViewItem).Products.Remove(productsGrid.SelectedItem as Product);
+            ValidateGrid(null, null);
+        }
+
+        private void editProduct_Click(object sender, RoutedEventArgs e)
+        {
+            if (treeView.SelectedItem == null || productsGrid.SelectedItem == null)
+            {
+                MessageBox.Show("Вы должны выбрать раздел и товар", "Ошибка");
+                return;
+            }
+            ProductData = null;
+            Product curProduct = productsGrid.SelectedItem as Product;
+            ProductCard productCard = new ProductCard(curProduct);
+            productCard.Owner = this;
+            productCard.Closed += (sender, e) => IsEnabled = true;
+            productCard.Closed += EditProduct;
+            productCard.Show();
+            IsEnabled = false;
+            ValidateGrid(null, null);
+        }
+        private void EditProduct(object sender, EventArgs e)
+        {
+            if (ProductData != null)
+            {
+                Product curProduct = productsGrid.SelectedItem as Product;
+                if ((treeView.SelectedItem as MyTreeViewItem).Products.Select(x => x.Name).Contains((ProductData as Product).Name) && (ProductData as Product).Name != curProduct.Name)
+                {
+                    MessageBox.Show("Введённое название товара в этом разделе не уникально", "Ошибка");
+                    return;
+                }
+                var change = (treeView.SelectedItem as MyTreeViewItem).Products.Find(x => x.Name == curProduct.Name);
+                change.Name = (ProductData as Product).Name;
+                change.Price = (ProductData as Product).Price;
+                change.Code = (ProductData as Product).Code;
+                change.Left = (ProductData as Product).Left;
+                ValidateGrid(null, null);
+            }
+        }
+
+        private void exportButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                StringBuilder sb = new StringBuilder();
+                SaveFileDialog fileDialog = new SaveFileDialog();
+                fileDialog.Filter = "Файлы CSV | *.csv";
+                if (fileDialog.ShowDialog() == true)
+                {
+                    using (StreamWriter stream = new StreamWriter(fileDialog.FileName))
+                    {
+                        foreach (MyTreeViewItem item in treeView.Items)
+                        {
+                            GoThrough(item, sb);
+                        }
+                        stream.Write(sb.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Произошла ошибка:\n{ex.Message}", "Ошибка");
+            }
+        }
+
+        private void GoThrough(MyTreeViewItem tree, StringBuilder sb)
+        {
+            foreach (var product in tree.Products)
+            {
+                if (int.TryParse(lowValue.Text, out int left) && product.Left < left)
+                {
+                    sb.Append($"{string.Join('/', AncestorsAndSelf(tree))};{product.Code};{product.Name};{product.Left}{Environment.NewLine}");
+                }
+            }
+            foreach (MyTreeViewItem item in tree.Items)
+            {
+                GoThrough(item, sb);
+            }
+        }
+
+        private List<string> AncestorsAndSelf(MyTreeViewItem tree)
+        {
+            List<string> items = new List<string>();
+            var cur = tree;
+            while(cur!= null)
+            {
+                items.Add(cur.Header.ToString());
+                if (cur.Parent == null)
+                    cur = null;
+                else
+                    cur = cur.Parent as MyTreeViewItem;
+            }
+
+            items.Reverse();
+            return items;
         }
     }
 }

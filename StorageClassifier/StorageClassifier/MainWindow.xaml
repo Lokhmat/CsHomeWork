@@ -21,7 +21,7 @@
                 <MenuItem Header="Файл" Background="#FFEEF5FD" >
                     <MenuItem x:Name="loadButton" Header="Загрузить" Click="loadButton_Click"/>
                     <MenuItem x:Name="saveButton" Header="Сохранить" Click="saveButton_Click"/>
-                    <MenuItem x:Name="faqButton" Header="О программе"/>
+                    <MenuItem x:Name="faqButton" Header="О программе" Click="faqButton_Click"/>
                 </MenuItem>
             </Menu>
             
@@ -96,6 +96,7 @@
                 <DataGridTextColumn Header="Артикул" IsReadOnly="True" Binding="{Binding Path=Code}"/>
                 <DataGridTextColumn Header="Цена" IsReadOnly="True" Binding="{Binding Path=Price}"/>
                 <DataGridTextColumn Header="Остаток" IsReadOnly="True" Binding="{Binding Path=Left}"/>
+                <DataGridTextColumn Header="Путь" IsReadOnly="True" Binding="{Binding Path=Path}"/>
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>

@@ -5,8 +5,11 @@ using System.Text;
 
 namespace StorageClassifier
 {
+    /// <summary>
+    /// Sub class so TreeView also could contain products.
+    /// </summary>
     [Serializable]
-    class MyTreeViewItem : TreeViewItem
+    public class MyTreeViewItem : TreeViewItem
     {
         public List<Product> Products { get; set; } = new List<Product>();
     }

@@ -4,8 +4,6 @@
     xmlns:local="clr-namespace:StorageClassifier">
 
 
-    <Style TargetType="{x:Type local:MyTreeView}" BasedOn="{StaticResource {x:Type TreeView}}">
-        
-        
-    </Style>
+
+
 </ResourceDictionary>

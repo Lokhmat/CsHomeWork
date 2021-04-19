@@ -26,17 +26,19 @@ namespace StorageClassifier
         bool changed = false;
         public object ProductData { get; set; }
         string newName;
-        MyItem backupTree;
         public MainWindow()
         {
             InitializeComponent();
-            backupTree = new MyItem();
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += CheckFields;
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 20);
             dispatcherTimer.Start();
         }
-
+        /// <summary>
+        /// Check if we could unlock some buttons to user if he changed smth.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CheckFields(object sender, EventArgs e)
         {
             if (productsGrid.SelectedItems.Count != 1)
@@ -77,25 +79,38 @@ namespace StorageClassifier
             }
             CheckForDuplicateNodes();
         }
-
+        /// <summary>
+        /// Another method for checking, only in order to fit every in 40 lines.
+        /// </summary>
         private void CheckForDuplicateNodes()
         {
             var t = treeView.Items.OfType<TreeViewItem>();
             if (t.Select(x => x.Header).Contains(nodeName.Text))
-
                 addGlobalNodeButton.IsEnabled = false;
-            else
+            else if (nodeName.Text != "")
                 addGlobalNodeButton.IsEnabled = true;
             if (treeView.SelectedItem != null)
             {
                 t = (treeView.SelectedItem as TreeViewItem).Items.OfType<TreeViewItem>();
                 if (t.Select(x => x.Header).Contains(nodeName.Text))
                     addNodeButton.IsEnabled = false;
-                else
+                else if (nodeName.Text != "")
                     addNodeButton.IsEnabled = true;
+                if (treeView.SelectedItem != null)
+                {
+                    addLineButton.IsEnabled = true;
+                }
+                else
+                {
+                    addLineButton.IsEnabled = false;
+                }
             }
         }
-
+        /// <summary>
+        /// Adding sub node to another node.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addNodeButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -120,7 +135,11 @@ namespace StorageClassifier
                 MessageBox.Show($"Произошла ошибка:\n{ex.Message}", "Ошибка");
             }
         }
-
+        /// <summary>
+        /// Add global node to treeView.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addGlobalNodeButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -138,17 +157,21 @@ namespace StorageClassifier
                 }
                 var node = new MyTreeViewItem() { Header = nodeName.Text };
                 treeView.Items.Add(node);
-                backupTree.Items.Add(new MyItem() { prototype = node, Header = node.Header.ToString() });
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Произошла ошибка:\n{ex.Message}", "Ошибка");
             }
         }
-
+        /// <summary>
+        /// Deleting node fron treeView.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void deleteNode_Click(object sender, RoutedEventArgs e)
         {
-            if (treeView.SelectedItem != null && (treeView.SelectedItem as TreeViewItem).Items.Count == 0)
+            if (treeView.SelectedItem != null && (treeView.SelectedItem as TreeViewItem).Items.Count == 0 && (treeView.SelectedItem as MyTreeViewItem).Products.Count == 0)
                 if ((treeView.SelectedItem as TreeViewItem).Parent is TreeView)
                     treeView.Items.Remove(treeView.SelectedItem);
                 else
@@ -156,7 +179,11 @@ namespace StorageClassifier
             else
                 MessageBox.Show("Раздел не выбран или не пуст", "Ошибка");
         }
-
+        /// <summary>
+        /// Handler of edit button for node.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void editNode_Click(object sender, RoutedEventArgs e)
         {
             if (treeView.SelectedItem == null)
@@ -183,6 +210,11 @@ namespace StorageClassifier
             window.Show();
             IsEnabled = false;
         }
+        /// <summary>
+        /// Handles result from edit node window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SetNewName(object sender, RoutedEventArgs e)
         {
             if (changed == true && newName != null && newName != "" && (treeView.SelectedItem as TreeViewItem).Parent is TreeView)
@@ -212,7 +244,11 @@ namespace StorageClassifier
             changed = false;
             IsEnabled = true;
         }
-
+        /// <summary>
+        /// Handler of addition of new product, makes new window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addLineButton_Click(object sender, RoutedEventArgs e)
         {
             ProductData = null;
@@ -228,10 +264,14 @@ namespace StorageClassifier
             productCard.Show();
             IsEnabled = false;
         }
-
+        /// <summary>
+        /// Writes product to treeView.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void WriteProduct(object sender, EventArgs e)
         {
-            if (ProductData != null)
+            if (ProductData != null && (treeView.SelectedItem as MyTreeViewItem) != null)
             {
                 if ((treeView.SelectedItem as MyTreeViewItem).Products.Select(x => x.Name).Contains((ProductData as Product).Name))
                 {
@@ -243,21 +283,29 @@ namespace StorageClassifier
                 ValidateGrid(null, null);
             }
         }
+        /// <summary>
+        /// Redrawing grid if smth changed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ValidateGrid(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (ProductData != null)
+            if (treeView.SelectedItem as MyTreeViewItem != null)
             {
                 productsGrid.Items.Clear();
                 foreach (Product product in (treeView.SelectedItem as MyTreeViewItem).Products)
                 {
                     productsGrid.Items.Add(product);
                 }
-                productsGrid.Items.Add(new Product() { Name = "___ Товары в подразделах __", Code = "_____"});
+                productsGrid.Items.Add(new Product() { Name = "___ Товары в подразделах __", Code = "_____" });
                 foreach (MyTreeViewItem item in (treeView.SelectedItem as MyTreeViewItem).Items)
                     GoDownTree(item);
             }
         }
-
+        /// <summary>
+        /// Recursive method for wathkthrough tree.
+        /// </summary>
+        /// <param name="node"> Another node.</param>
         private void GoDownTree(MyTreeViewItem node)
         {
             foreach (Product product in node.Products)
@@ -270,39 +318,107 @@ namespace StorageClassifier
             }
         }
 
-
-        // TODO Добавить редактирование товаров
+        /// <summary>
+        /// Handler of serializing treeView.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show(((treeView.Items[0] as TreeViewItem).Items[0] as TreeViewItem);
-            /*
-            // Тут не подходит сериализация 
-            var settings = new JsonSerializerSettings()
-            {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            };
-            File.AppendAllText($"save.txt", $"{JsonConvert.SerializeObject(treeView.Items, settings)}");
-            // Я не знаю, работает это или нет
-            /*
             try
             {
-                using (Stream stream = File.Open("storage.bin", FileMode.Create))
+                SaveFileDialog fileDialog = new SaveFileDialog();
+                fileDialog.Filter = "Файлы bin | *.bin";
+                if (fileDialog.ShowDialog() == true)
                 {
-                    var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-                    binaryFormatter.Serialize(stream, treeView.Items.Cast<MyTreeViewItem>().ToList());
+                    using (Stream stream = File.Open(fileDialog.FileName, FileMode.Create))
+                    {
+                        var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                        MyItem tree = new MyItem();
+                        foreach (MyTreeViewItem item in treeView.Items)
+                        {
+                            MyItem newItem = new MyItem() { Products = item.Products, Header = item.Header.ToString(), Parent = tree };
+                            tree.Items.Add(newItem);
+                            TreeBuilder(item, newItem);
+                        }
+                        binaryFormatter.Serialize(stream, tree);
+                    }
                 }
             }
             catch (Exception ex)
-            { MessageBox.Show(ex.Message); }*/
-            RelDict.SerializeTree(treeView);
+            {
+                MessageBox.Show($"Произошла ошибка:\n{ex.Message}", "Ошибка");
+            }
 
         }
+        /// <summary>
+        /// Build tree in order to serialize.
+        /// </summary>
+        /// <param name="tree"> UI tree.</param>
+        /// <param name="receiveTree"> Serializable tree.</param>
+        private void TreeBuilder(MyTreeViewItem tree, MyItem receiveTree)
+        {
+            foreach (MyTreeViewItem item in tree.Items)
+            {
+                MyItem newItem = new MyItem() { Products = item.Products, Header = item.Header.ToString(), Parent = receiveTree };
+                receiveTree.Items.Add(newItem);
+                TreeBuilder(item, newItem);
+            }
 
+        }
+        /// <summary>
+        /// Handler of load button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void loadButton_Click(object sender, RoutedEventArgs e)
         {
-            //RelDict.DeserializeTree("storage.bin");
-        }
+            try
+            {
 
+                OpenFileDialog fileDialog = new OpenFileDialog();
+                fileDialog.Filter = "Файлы bin | *.bin";
+                if (fileDialog.ShowDialog() == true)
+                {
+                    using (Stream stream = File.Open(fileDialog.FileName, FileMode.Open))
+                    {
+                        var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                        MyItem tree = binaryFormatter.Deserialize(stream) as MyItem;
+                        treeView.Items.Clear();
+                        foreach (MyItem item in tree.Items)
+                        {
+                            MyTreeViewItem newItem = new MyTreeViewItem() { Products = item.Products, Header = item.Header.ToString() };
+                            treeView.Items.Add(newItem);
+                            Rebuild(item, newItem);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Произошла ошибка:\n{ex.Message}", "Ошибка");
+            }
+        }
+        /// <summary>
+        /// Rebuilding deserialized tree from file to UI.
+        /// </summary>
+        /// <param name="tree"> Tree from file.</param>
+        /// <param name="uiTree"> Tree to paste in UI.</param>
+        private void Rebuild(MyItem tree, MyTreeViewItem uiTree)
+        {
+            foreach (MyItem item in tree.Items)
+            {
+                MyTreeViewItem newItem = new MyTreeViewItem() { Products = item.Products, Header = item.Header.ToString() };
+                uiTree.Items.Add(newItem);
+                TreeBuilder(newItem, item);
+            }
+        }
+        /// <summary>
+        /// Handler of deletion of a Product.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void deleteProduct_Click(object sender, RoutedEventArgs e)
         {
             if (treeView.SelectedItem == null || productsGrid.SelectedItem == null)
@@ -311,26 +427,34 @@ namespace StorageClassifier
                 return;
             }
             var clickedProduct = productsGrid.SelectedItem as Product;
-            if(!(treeView.SelectedItem as MyTreeViewItem).Products.Remove(clickedProduct))
+            if (!(treeView.SelectedItem as MyTreeViewItem).Products.Remove(clickedProduct))
             {
-                foreach(MyTreeViewItem item in (treeView.SelectedItem as MyTreeViewItem).Items)
+                foreach (MyTreeViewItem item in (treeView.SelectedItem as MyTreeViewItem).Items)
                 {
                     DeleteDown(item, clickedProduct);
                 }
             }
             ValidateGrid(null, null);
         }
-
+        /// <summary>
+        /// Another walkthrough tree in order to delete correct product.
+        /// </summary>
+        /// <param name="tree"> Another tree node.</param>
+        /// <param name="product"> Product to delete.</param>
         private void DeleteDown(MyTreeViewItem tree, Product product)
         {
             if (tree.Products.Remove(product))
                 return;
-            foreach(MyTreeViewItem item in tree.Items)
+            foreach (MyTreeViewItem item in tree.Items)
             {
                 DeleteDown(item, product);
             }
         }
-
+        /// <summary>
+        /// Handler of editing product.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void editProduct_Click(object sender, RoutedEventArgs e)
         {
             if (treeView.SelectedItem == null || productsGrid.SelectedItem == null)
@@ -346,11 +470,16 @@ namespace StorageClassifier
             productCard.Closed += EditProduct;
             productCard.Show();
             IsEnabled = false;
-            ValidateGrid(null, null);
+
         }
+        /// <summary>
+        /// Editing product and updating window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditProduct(object sender, EventArgs e)
         {
-            if (ProductData != null)
+            if (ProductData != null && treeView.SelectedItem != null && productsGrid.SelectedItem as Product != null)
             {
                 Product curProduct = productsGrid.SelectedItem as Product;
                 if ((treeView.SelectedItem as MyTreeViewItem).Products.Select(x => x.Name).Contains((ProductData as Product).Name) && (ProductData as Product).Name != curProduct.Name)
@@ -371,18 +500,27 @@ namespace StorageClassifier
                 }
             }
         }
-
+        /// <summary>
+        /// Find product in all tree.
+        /// </summary>
+        /// <param name="tree"> Tree to find into.</param>
+        /// <param name="product"> Product to find.</param>
+        /// <param name="findProduct"> List of acceptable products.</param>
         private void FindProduct(MyTreeViewItem tree, Product product, List<Product> findProduct)
         {
             var cur = tree.Products.Find(x => x.Path == product.Path);
             if (cur != null)
                 findProduct.Add(cur);
-            foreach(MyTreeViewItem item in tree.Items)
+            foreach (MyTreeViewItem item in tree.Items)
             {
                 FindProduct(item, product, findProduct);
             }
         }
-
+        /// <summary>
+        /// Export ot CSV handler.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void exportButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -407,7 +545,11 @@ namespace StorageClassifier
                 MessageBox.Show($"Произошла ошибка:\n{ex.Message}", "Ошибка");
             }
         }
-
+        /// <summary>
+        /// Another walkthrough tree(Building path of node).
+        /// </summary>
+        /// <param name="tree"> Tree to walk.</param>
+        /// <param name="sb"> String to build path.</param>
         private void GoThrough(MyTreeViewItem tree, StringBuilder sb)
         {
             foreach (var product in tree.Products)
@@ -422,7 +564,11 @@ namespace StorageClassifier
                 GoThrough(item, sb);
             }
         }
-
+        /// <summary>
+        /// Get all Anscestors of a node and a node itself.
+        /// </summary>
+        /// <param name="tree"> Node of a tree.</param>
+        /// <returns> List of anscestors and node itself.</returns>
         private List<string> AncestorsAndSelf(MyTreeViewItem tree)
         {
             List<string> items = new List<string>();
@@ -438,6 +584,19 @@ namespace StorageClassifier
 
             items.Reverse();
             return items;
+        }
+        /// <summary>
+        /// Show FAQ.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void faqButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Привет!" +
+                "В программе реализован весь обязательный функционал + 1 доп. функция\n" +
+                "Я не очень хорошо отдебажил, тк не успевал, так что существует вероятность что упадёт, буду рад услышать коменты что забыл.\n" +
+                "На TreeView и DataGrid есть контекстные меню чтобы удалить/изменить элементы\n" +
+                "Чтобы разблокировались кнопки надо выполнить то, что для них нужно(Например чтобы добавить узел напишите название узла, для экспорта напишите маленькое кол-во из тз)");
         }
     }
 }

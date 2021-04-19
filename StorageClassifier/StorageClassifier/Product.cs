@@ -4,6 +4,10 @@ using System.Text;
 
 namespace StorageClassifier
 {
+    /// <summary>
+    /// Class for product realization.
+    /// </summary>
+    [Serializable]
     public class Product
     {
         public string Name { get; set; }

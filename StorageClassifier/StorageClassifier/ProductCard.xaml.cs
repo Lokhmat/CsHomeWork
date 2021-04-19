@@ -25,15 +25,22 @@ namespace StorageClassifier
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 50);
             dispatcherTimer.Start();
         }
-
-        public ProductCard(Product product) :this()
+        /// <summary>
+        /// Constructor for editind.
+        /// </summary>
+        /// <param name="product"> Product to edit.</param>
+        public ProductCard(Product product) : this()
         {
             Name.Text = product.Name;
             Code.Text = product.Code;
             Price.Text = product.Price.ToString();
             Left.Text = product.Left.ToString();
         }
-
+        /// <summary>
+        /// Validating that fields in window are in appropriate format.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CheckFields(object sender, EventArgs e)
         {
             if (Name.Text != "" && Code.Text != "" && double.TryParse(Price.Text, out _) && int.TryParse(Left.Text, out _))
@@ -42,6 +49,11 @@ namespace StorageClassifier
                 saveButton.IsEnabled = false;
         }
 
+        /// <summary>
+        /// Handler of saving changes.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
             Product product = new Product()

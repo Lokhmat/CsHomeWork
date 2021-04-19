@@ -5,12 +5,17 @@ using Newtonsoft.Json;
 
 namespace StorageClassifier
 {
+    /// <summary>
+    /// Class for Item for Serialization/Deserialization.
+    /// </summary>
+    [Serializable]
     class MyItem
     {
         public List<MyItem> Items { get; set; } = new List<MyItem>();
         public List<Product> Products { get; set; } = new List<Product>();
         public string Header { get; set; }
-        [JsonIgnore]
-        public MyTreeViewItem prototype;
+        public MyItem Parent;
+
+        
     }
 }

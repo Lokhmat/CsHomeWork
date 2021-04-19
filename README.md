@@ -5,4 +5,5 @@ Place to store my cs hw
 * Winforms App Basic Task manager
 * Winforms App Text and cs code editor
 * WPF App analyser of csv tables
+* WPF App Storage Classifier
 * And some minor HWs

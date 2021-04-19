@@ -18,7 +18,6 @@ D:\Work\C#HW\StorageClassifier\StorageClassifier\obj\Debug\netcoreapp3.1\Storage
 D:\Work\C#HW\StorageClassifier\StorageClassifier\obj\Debug\netcoreapp3.1\StorageClassifier.genruntimeconfig.cache
 D:\Work\C#HW\StorageClassifier\StorageClassifier\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 D:\Work\C#HW\StorageClassifier\StorageClassifier\obj\Debug\netcoreapp3.1\ProductCard.g.cs
-D:\Work\C#HW\StorageClassifier\StorageClassifier\obj\Debug\netcoreapp3.1\GeneratedInternalTypeHelper.g.cs
 D:\Work\C#HW\StorageClassifier\StorageClassifier\obj\Debug\netcoreapp3.1\ProductCard.baml
 D:\Work\C#HW\StorageClassifier\StorageClassifier\obj\Debug\netcoreapp3.1\Themes\Generic.baml
 D:\Work\C#HW\StorageClassifier\StorageClassifier\obj\Debug\netcoreapp3.1\StorageClassifier.csproj.CopyComplete

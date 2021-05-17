@@ -1,0 +1,33 @@
+﻿<Window x:Class="Pokupateli_i_ya_ne_mogu_bolshe.RegPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Pokupateli_i_ya_ne_mogu_bolshe"
+        mc:Ignorable="d"
+        Title="RegPage" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="9*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox HorizontalAlignment="Center" Grid.Row="1" x:Name="LoginBox" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
+        <TextBox HorizontalAlignment="Center" Grid.Row="2" x:Name="PasswordBox" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
+        <Label Content="Логин: " HorizontalAlignment="Left" Margin="10,51,0,0" Grid.Row="1" VerticalAlignment="Top" Width="116"/>
+        <Label Content="Пароль: " HorizontalAlignment="Left"  Grid.Row="2" Margin="10,46,0,46"/>
+        <Button Content="Войти" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Width="88" Height="26" x:Name="OkButton" Click="OkButton_Click" BorderThickness="2" Background="#FF461DB4" Foreground="White"/>
+        <RadioButton x:Name="Admin" Content="Админ" Grid.Column="2" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" GroupName="User"/>
+        <RadioButton x:Name="Cust" Content="Покупатель" Grid.Column="2" HorizontalAlignment="Left" Margin="10,30,0,0" Grid.Row="1" VerticalAlignment="Top" GroupName="User"/>
+        <RadioButton x:Name="Entr" Content="Вход" Grid.Column="2" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" GroupName="Type"/>
+        <RadioButton x:Name="Reg" Content="Регистрация" Grid.Column="2" HorizontalAlignment="Left" Margin="10,30,0,0" Grid.Row="2" VerticalAlignment="Top" GroupName="Type"/>
+        <Label Content="" HorizontalAlignment="Left" Margin="381,0,0,0" Grid.Row="3" VerticalAlignment="Center"/>
+
+
+    </Grid>
+</Window>

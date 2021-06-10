@@ -7,4 +7,5 @@ Place to store my cs hw
 * WPF App analyser of csv tables
 * WPF App Storage Classifier
 * WPF App for simple shop system
+* Simple AspNet messenger app
 * And some minor HWs
